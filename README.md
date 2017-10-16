@@ -1,2 +1,2 @@
-# note
-javascript笔记
+# javascript的相关笔记
+
