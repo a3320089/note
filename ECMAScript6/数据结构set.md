@@ -19,3 +19,14 @@ const s = new Set([1,2,3]);
 console.log(s);//Set{1,2,3}
 ```
 
+
+
+## set类的属性
+
+```javascript
+console.log(s.size) // 3
+```
+
+
+
+## set类的方法
