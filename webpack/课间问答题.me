@@ -1,0 +1,123 @@
+1. 把项目运行起来
+2. 把 一下 的问题理顺
+
+
+关于 .babelrc 这个配置文件
+    干什么的,
+        ：存放babel-loader的插件和预设；
+
+    什么时候会被使用
+
+        ：当插件和预设复杂且多的时候需要 把所有依赖的插件单独放在.babelrc中，统一管理；
+
+    如何配置 预设和插件
+        ：{
+            "presets":[presetName,presetName], //预设 （是个插件的集合）
+            "plugins":['插件名']   // 单独的插件
+        }
+        在webpack.config.js里面的module下rules下的use:["babel-loader"]
+
+关于 babel
+    干什么的
+        ：把高版本的JS语言转成部分浏览器支持的JS语言；（把能转成ES5的代码转成ES5代码）；
+    如何在 cli 使用
+        ：npm i -D babel-cli
+
+    如何在 webpack 使用
+        :在webpack.config.js里面的module下rules结构下面use 数组里面使用；
+                例如：
+                    use:['babel-loader']
+
+    基于什么运行的 (插件)
+        :babel-core ,babel-loader;
+    预设是什么 (插件的集合)
+        :插件的集合 babel-preset-env(ES6插件集合), babel-preset-react （react插件集合）；可以简写：babel-presets=env,react
+
+关于 webpack 的
+    干什么的
+        :因为浏览器不支持模块化代码，通过webpack打包JS代码，生成一个新的JS文件；这个新的
+        JS文件可以在浏览器上运行了；
+
+    入口是什么意思, 如何配置
+
+        ：wbpack打包的时候，通过一个JS文件可以找到其他需要引入的模块，而webpack可以通过这个入口可以找到所有需要引入的模块。
+
+    输出是什么意思, 如何配置(文件名, 输出路径)
+        ：把webpack打包后会生成一个JS文件，而这个出口就是指这个JS文件需要存放的位置和文件名
+
+    什么是 loader,
+
+        ：loader是可以把代码转换成浏览器支持的ES5代码的一个插件，例如:babel-loader
+
+    在什么情况下会让 loader 起作用
+
+        ：下载loader的插件，并且在webpack的rules底下引用了这个loader。打包时就可以起作用
+            当某个rule被匹配到之后
+        
+
+    如何在 webpack 使用 babel-loader
+
+         use:["babel-loader",...arg];
+
+
+
+关于 npm 的
+    干什么用的
+
+        ：包管理器，可以通过NPM下载各种插件，包，库。
+
+    关于package.json的文件
+        如何生成
+            ：npm init -y
+        什么情况下会被使用
+
+            ：需要插件项目装了什么插件的时候，还有通过npm i可以下载该文件下写有的插件
+
+        *如何在里面声明命令
+
+            ：在package.json 底下的scripts创建一个健值对，通过npm run key指来调用声明的命令，例如: "dev":"webpack"
+
+            在里面声明命令的好处
+
+            ：可以快速运行复杂的命令行
+
+    如何安装依赖 (声明为生产还是开发)
+
+            ：npm i -D packName （开发依赖）
+              npm i -S packName (生产依赖)
+
+关于模块化语法
+    es6
+        import 'f.js'
+
+                让这个模块运行，但不需要接受它暴露的接口
+
+        import a from './ds.js'
+
+                引入模块的默认导出，让a的变量接受他的默认导出
+
+        import a,{b,c} from './ds.js'
+                a接受默认导出
+                {b,c}接受标准导出
+
+        import a,{b as ccd,c} from './ds.js'
+
+            a接受默认导出
+            {b,c}接受标准导出
+            把b重命名成ccd,b不存在了
+
+        export
+            标准导出，需要接受的名字和导出的名字一样，并且导出的东西不能是匿名的，可以导出多个。
+            接受 imports {a,b,c} from "./a"
+        export default
+            默认导出，可以匿名，接收可以用任意名字接收
+
+    commonJS
+        require('./a.js')
+
+        module.exports
+            模块接收的是module.exports的导出
+        exports
+            export初始默认指向module.exports
+            如果这个指向被重新赋值，就会断掉和module.exports的联系
+            不能直接给它赋值

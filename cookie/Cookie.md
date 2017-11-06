@@ -20,6 +20,8 @@
 
 
 
+以下是封装的Cookie封装
+
 ```javascript
 
 function setCookie(key,value,t) {
