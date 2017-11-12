@@ -3,20 +3,17 @@
 webpack.cnofig.js的配置文件写法
 
 ```javascript
+var path = require("path");
+var htmlWebpack = require("html-webpack-plugin");
+var cleanWebpack = require("clean-webpack-plugin");
+var rv = (...a) => path.resolve(__dirname,...a);
 
-const path = require("path");
+var webpack = require("webpack");
 
-const HtmlWebpack = require("html-webpack-plugin");
-const CleanWebpack = require("clean-webpack-plugin");
-
-const rv = (name) =>{
-    return path.resolve(__dirname,name);
-}
-
-module.exports = {
+module.exports ={
     entry:"./src/app.js",
     output:{
-        filename:"[hash]_app.js",
+        filename:"app.js",
         path:rv("dist")
     },
     module:{
@@ -24,15 +21,35 @@ module.exports = {
             test:/\.js$/,
             use:["babel-loader"],
             exclude:[rv("node_modules")]
-        }]
+        },{
+            test:/\.css$/,
+            use:["style-loader","css-loader"]
+        },
+        {
+            test:/\.(jpg|png|jpeg|gif)/,
+            use:["file-loader"]
+        }
+        ]
     },
+    devtool:"eval-source-map"
+    ,
     plugins:[
-        new HtmlWebpack({
+        new htmlWebpack({
             filename:"index.html",
             template:"./src/index.html"
         }),
-        new CleanWebpack(["dist"])
-    ]
+        new cleanWebpack(["dist"]),
+        new webpack.ProvidePlugin({
+            React:"react",
+            Component:["react","Component"],
+            ReactDOM:"react-dom"
+        })
+    ],
+    devServer:{
+        open:true,
+      historyApiFallback:true
+    }
+
 }
 ```
 
