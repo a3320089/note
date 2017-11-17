@@ -65,4 +65,8 @@ module.exports ={
 
 ​	babel-preset-env		处理es6代码
 
-​	
+### ​package.json:
+
+"dev": "webpack",
+
+"start": "webpack-dev-server"
