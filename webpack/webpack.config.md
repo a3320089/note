@@ -23,7 +23,7 @@ module.exports ={
             exclude:[rv("node_modules")]
         },{
             test:/\.css$/,
-            use:["style-loader","css-loader"]
+            use:["style-loader","css-loader"] // loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         },
         {
             test:/\.(jpg|png|jpeg|gif)/,
