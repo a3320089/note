@@ -66,3 +66,80 @@ this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
 
 
 
+### 引入axios
+
+```
+一、安装
+1、 利用npm安装npm install axios --save
+
+2、 利用bower安装bower install axios --save
+
+3、 直接利用cdn引入<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+```
+
+
+
+## GET
+
+```javascript
+//通过给定的ID来发送请求
+axios.get('/user?ID=12345')
+  .then(function(response){
+    console.log(response);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+//以上请求也可以通过这种方式来发送
+axios.get('/user',{
+  params:{
+    ID:12345
+  }
+})
+.then(function(response){
+  console.log(response);
+})
+.catch(function(err){
+  console.log(err);
+});
+
+作者：FunnySeeker
+链接：http://www.jianshu.com/p/df464b26ae58
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+### POST
+
+```javascript
+axios.post('/user',{
+  firstName:'Fred',
+  lastName:'Flintstone'
+})
+.then(function(res){
+  console.log(res);
+})
+.catch(function(err){
+  console.log(err);
+});
+
+```
+
+### 多个请求
+
+```javascript
+function getUserAccount(){
+  return axios.get('/user/12345');
+}
+function getUserPermissions(){
+  return axios.get('/user/12345/permissions');
+}
+axios.all([getUserAccount(),getUserPermissions()])
+  .then(axios.spread(function(acct,perms){
+    //当这两个请求都完成的时候会触发这个函数，两个参数分别代表返回的结果
+  }))
+
+```
+
